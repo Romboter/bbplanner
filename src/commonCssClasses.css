@@ -1,9 +1,0 @@
-.button{
-
-    margin: 0;
-    display: grid;
-    place-content: center;
-    user-select: none;
-    border: solid 1px black;
-    border-radius: 5px;
-}
