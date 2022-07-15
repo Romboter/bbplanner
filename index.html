@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BBPlanner</title>
+    <script src="./bunkerTypes.js" defer></script>
+    <script src="./web.js" defer></script>
+    <script src="./addPiece.js" defer></script>
+    <script src="./minorFunctions.js" defer></script>
+    <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="./commonCssClasses.css">
+</head>
+<body>
+    <section id="workspace_details_wraper">
+        <label>total field width in meters <input type="number" name="width" id="canvas_width" min="45" max="10000" step="5" ></label>
+        <label>total field height in meters <input type="number" name="height" id="canvas_heigth" min="45" max="10000" step="5" ></label>
+    </section>
+    <section id="toolbar_wraper">
+        <div id="saveBTN" class="btn save"></div>
+        <div id="loadBTN" class="btn load"></div>
+        <div id="toolbar" class="tabber">
+            <!-- <p>zoom level</p>
+            <p>1px = 1m < --- > 15px = 1m</p> 
+            <input type="range" id="zoom" min="1" max="15" value="8"> -->
+            <label>selecive arcs <input type="checkbox" id="selectiveArcs"></label>
+            <div id="rangeToggle">
+                <!-- rg options -->
+                <label>RG range <input type="checkbox" id="RGRangeToggle"></label><br>
+                <div id="RGRangeToggles">
+                    <label class="RGToggleHide">long arc <input type="checkbox" id="RGlongToggle"></label>
+                    <input class="RGlongHide" type="number" id="RGlongRange" min="5" max="60" value="50"><br>
+                    <label class="RGToggleHide">mid arc  <input type="checkbox" id="RGmidToggle"></label>
+                    <input class="RGmidHide" type="number" id="RGmidRange" min="5" max="60" value="25"><br>
+                    <label class="RGToggleHide">short arc  <input type="checkbox" id="RGshortToggle"></label>
+                    <input class="RGshortHide" type="number" id="RGshortRange" min="5" max="60" value="15"><br>
+                </div>
+                <!-- mg options -->
+                <label>MGG range <input type="checkbox" id="MGGRangeToggle"></label><br>
+                <div id="MGGRangeToggles">
+                    <label class="MGGToggleHide">long arc <input type="checkbox" id="MGGlongToggle"></label>
+                    <input class="MGGlongHide" type="number" id="MGGlongRange" min="5" max="60" value="50"><br>
+                    <label class="MGGToggleHide">mid arc  <input type="checkbox" id="MGGmidToggle"></label>
+                    <input class="MGGmidHide" type="number" id="MGGmidRange" min="5" max="60" value="25"><br>
+                    <label class="MGGToggleHide">short arc  <input type="checkbox" id="MGGshortToggle"></label>
+                    <input class="MGGshortHide" type="number" id="MGGshortRange" min="5" max="60" value="15"><br>
+                </div>
+                <!-- at options -->
+                <label>ATG range <input type="checkbox" id="ATGRangeToggle"></label><br>
+                <div id="ATGRangeToggles">
+                    <label class="ATGToggleHide">long arc <input type="checkbox" id="ATGlongToggle"></label>
+                    <input class="ATGlongHide" type="number" id="ATGlongRange" min="5" max="60" value="50"><br>
+                    <label class="ATGToggleHide">mid arc  <input type="checkbox" id="ATGmidToggle"></label>
+                    <input class="ATGmidHide" type="number" id="ATGmidRange" min="5" max="60" value="25"><br>
+                    <label class="ATGToggleHide">short arc  <input type="checkbox" id="ATGshortToggle"></label>
+                    <input class="ATGshortHide" type="number" id="ATGshortRange" min="5" max="60" value="15"><br>
+                </div>
+                <!-- hg options -->
+                <label>HG range <input type="checkbox" id="HGRangeToggle"></label>
+                <input type="number" id="HGRange" min="5" max="400" value="5"><br>
+                <!-- ai options -->
+                <label>AI range <input type="checkbox" id="AIRangeToggle"></label>
+            </div>
+            <!-- debug info -->
+            <p id="mouse"></p>
+            <p id="rotation">x</p>
+            <!-- type selections -->
+            <div id="BunkerSelector">
+                <label>Bunker Core<input type="radio" name="type" value="BoB"></label>
+                <label>Bunker Square<input type="radio" name="type" value="BS"></label>
+                <label>Bunker Corner<input type="radio" name="type" value="BC"></label>
+                <label>Bunker Ramp<input type="radio" name="type" value="BR"></label>
+                <label>Rifle Garison<input type="radio" name="type" value="RG"></label>
+                <label>MG Garison<input type="radio" name="type" value="MGG"></label>
+                <label>Obs Bunker<input type="radio" name="type" value="OB"></label>
+                <label>Engine Bunker<input type="radio" name="type" value="EB"></label>
+                <label>AT Garison<input type="radio" name="type" value="ATG"></label>
+                <label>Howizer Garison<input type="radio" name="type" value="HG"></label>
+                <label>Ammo Bunker<input type="radio" name="type" value="AB"></label>
+                <label>Storm Cannon Core<input type="radio" name="type" value="SC"></label>
+                <label>Intel Center Core<input type="radio" name="type" value="IC"></label>
+                <label>straight trench<input type="radio" name="type" value="TS"></label>
+                <label>octagon trench<input type="radio" name="type" value="TO"></label>
+                <label>trench connector<input type="radio" name="type" value="TC"></label>
+            </div>
+            <!-- tier selection -->
+            <div id="tierSelector">
+                <label>T1 <br><input type="radio" name="tier" id="T1" value="0" disabled></label>
+                <label>T2 <br><input type="radio" name="tier" id="T2" value="1" disabled></label>
+                <label>T3 <br><input type="radio" name="tier" id="T3" value="2" disabled></label>
+            </div>
+            <!-- other tools -->
+            <div id="otherTools">
+                <label>eraser <input type="radio" name="type" value="Delete"></label>
+            </div>
+        </div>
+    </section>
+    <section id="canvas_wraper">
+        <canvas id="bbCanvas"></canvas>
+    </section>
+    <section id="BBdetails">
+        <div id="BBtabber">
+            <p id="dec" class="button">-</p>
+            <p id="selectedGroup">1</p>
+            <p id="inc" class="button">+</p>
+        </div>
+        <div id="bunkerGroupHighlight" class="button">highlight curent group</div>
+        <div id="bbCount">
+            <div class="c1 r1">Type\Tier</div>
+            <div class="c2 r1">T1</div>
+            <div class="c3 r1">T2</div>
+            <div class="c4 r1">T3</div>
+            <!-- <div class="c1 r2">BoB</div>
+            <div id="BoB-1" class="c2 r2">0</div>
+            <div id="BoB-2" class="c3 r2">0</div>
+            <div id="BoB-3" class="c4 r2">0</div>
+            <div class="c1 r3">Bunker Square</div>
+            <div id="BS-1" class="c2 r3">0</div>
+            <div id="BS-2" class="c3 r3">0</div>
+            <div id="BS-3" class="c4 r3">0</div>
+            <div class="c1 r4">Bunker Corner</div>
+            <div id="BC-1" class="c2 r4">0</div>
+            <div id="BC-2" class="c3 r4">0</div>
+            <div id="BC-3" class="c4 r4">0</div>
+            <div class="c1 r5">Bunker Ramp</div>
+            <div id="BR-1" class="c2 r5">0</div>
+            <div id="BR-2" class="c3 r5">0</div>
+            <div id="BR-3" class="c4 r5">0</div>
+            <div class="c1 r6">Rifle Garison</div>
+            <div id="RG-1" class="c2 r6">0</div>
+            <div id="RG-2" class="c3 r6">0</div>
+            <div id="RG-3" class="c4 r6">0</div>
+            <div class="c1 r7">MG Garison</div>
+            <div id="MGG-1" class="c2 r7">0</div>
+            <div id="MGG-2" class="c3 r7">0</div>
+            <div id="MGG-3" class="c4 r7">0</div>
+            <div class="c1 r8">OBS Bunker</div>
+            <div id="OB-1" class="c2 r8 Disabled"></div>
+            <div id="OB-2" class="c3 r8">0</div>
+            <div id="OB-3" class="c4 r8">0</div>
+            <div class="c1 r9">Engine Bunker</div>
+            <div id="EB-1" class="c2 r9 Disabled"></div>
+            <div id="EB-2" class="c3 r9">0</div>
+            <div id="EB-3" class="c4 r9">0</div>
+            <div class="c1 r10">AT Garison</div>
+            <div id="ATG-1" class="c2 r10 Disabled"></div>
+            <div id="ATG-2" class="c3 r10">0</div>
+            <div id="ATG-3" class="c4 r10">0</div>
+            <div class="c1 r11">Howizer Garison</div>
+            <div id="HG-1" class="c2 r11 Disabled"></div>
+            <div id="HG-2" class="c3 r11 Disabled"></div>
+            <div id="HG-3" class="c4 r11">0</div>
+            <div class="c1 r12">Ammo Bunker</div>
+            <div id="AB-1" class="c2 r12 Disabled"></div>
+            <div id="AB-2" class="c3 r12 Disabled"></div>
+            <div id="AB-3" class="c4 r12">0</div>
+            <div class="c1 r13">Intel Center Core</div>
+            <div id="IC-1" class="c2 r13 Disabled"></div>
+            <div id="IC-2" class="c3 r13 Disabled"></div>
+            <div id="IC-3" class="c4 r13">0</div>
+            <div class="c1 r14">Storm Cannon Core</div>
+            <div id="SC-1" class="c2 r14 Disabled"></div>
+            <div id="SC-2" class="c3 r14 Disabled"></div>
+            <div id="SC-3" class="c4 r14">0</div>
+            <div class="c1 r15">straight Trench</div>
+            <div id="TS-1" class="c2 r15">0</div>
+            <div id="TS-2" class="c3 r15">0</div>
+            <div id="TS-3" class="c4 r15">0</div>
+            <div class="c1 r16">octagon Trench</div>
+            <div id="TO-1" class="c2 r16">0</div>
+            <div id="TO-2" class="c3 r16">0</div>
+            <div id="TO-3" class="c4 r16">0</div>
+            <div class="c1 r17">trench connector</div>
+            <div id="TC-1" class="c2 r17">0</div>
+            <div id="TC-2" class="c3 r17">0</div>
+            <div id="TC-3" class="c4 r17">0</div> -->
+
+        </div>
+        <div id="bbStats">
+            <div class="c1 r1">total Pieces</div>
+            <div class="r1 c2"></div>
+            <div id="totalPieces" class="c3 r1">0</div>
+            <div class="c1 r2">Structual Integerty</div>
+            <div class="r2 c2"></div>
+            <div id="SIvalue" class="c3 r2">1</div>
+            <div class="c1 r3">Raw Health</div>
+            <div class="r3 c2"></div>
+            <div id="RawHP" class="c3 r3">0</div>
+            <div class="r4 c1">Total Health</div>
+            <div class="r4 c2"></div>
+            <div id="TotalHP" class="r4 c3">0</div>
+            <div class="r5 c1">Total Repair Cost <br> inc. trench | BB only</div>
+            <div id="TotalRepairCost" class="r5 c2"></div>
+            <div id="RepairCost" class="r5 c3">0</div>
+            <div class="r6 c1">Repair efficiency <br> %HP | EHP</div>
+            <div id="PhpPerSwing" class="r6 c2">0%</div>
+            <div id="EhpPerSwing" class="r6 c3">0</div>
+            <div class="r7 c1">Total Build Cost <br> Bmats | Concrete</div>
+            <div id="BCost" class="r7 c2">0</div>
+            <div id="CCost" class="r7 c3">0</div>
+
+
+        </div>
+    </section>
+    <footer>
+        <div id="creadits"></div>
+        <div class="copyright"></div>
+        <div class="links"></div>
+    </footer>
+</body>
+</html>
