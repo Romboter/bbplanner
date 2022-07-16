@@ -333,7 +333,7 @@ class RG extends BS{
     drawDetails(){
         ctx.font = `${2.5*scale}px Arial`;
         ctx.fillStyle = "#000"
-        ctx.fillText("R",this.center[0] - ctx.measureText("R").width/2,this.center[1]+10)
+        ctx.fillText("R",this.center[0] - ctx.measureText("R").width/2,this.center[1]+scale)
     }
     drawRange(range){
         let curentAngle = this.angleOfAttack/2 - this.angleOfAttack
@@ -351,7 +351,7 @@ class RG extends BS{
             if(pieceAlongPathData && pieceAlongPathData.group !== 'trenches'){
                 pieceAlongPath = bunkerGroupes[pieceAlongPathData.group].BBpieces[pieceAlongPathData.type][pieceAlongPathData.tier][pieceAlongPathData.piece]
             }
-            if(pieceAlongPath && ["BoB","RG","MMG","ATG","HG","SC","IC"].includes(pieceAlongPath.type) && this !== pieceAlongPath){
+            if(pieceAlongPath && ["BoB","RG","MMG","ATG","HG","SC","IC","OB"].includes(pieceAlongPath.type) && this !== pieceAlongPath){
                 let intersectTest 
                 for(let p = 0; p < 4; p ++){
                     intersectTest = intersects(
@@ -386,7 +386,7 @@ class RG extends BS{
                 if(pieceAlongPathData && pieceAlongPathData.group !== 'trenches'){
                     pieceAlongPath = bunkerGroupes[pieceAlongPathData.group].BBpieces[pieceAlongPathData.type][pieceAlongPathData.tier][pieceAlongPathData.piece]
                 }
-                if(pieceAlongPath && ["BoB","RG","MGG","ATG","HG","SC","IC"].includes(pieceAlongPath.type) && this !== pieceAlongPath){
+                if(pieceAlongPath && ["BoB","RG","MGG","ATG","HG","SC","IC","OB"].includes(pieceAlongPath.type) && this !== pieceAlongPath){
                     let intersectTest 
                     for(let p = 0; p < 4; p ++){
                         intersectTest = intersects(
@@ -413,6 +413,7 @@ class RG extends BS{
             ctx.closePath()
             ctx.fill()
             ctx.fillStyle = "#000"
+            ctx.globalCompositeOperation = 'destination-over';
 
         }
     }
@@ -448,7 +449,7 @@ class MGG extends BS{
     drawDetails(){
         ctx.font = `${2.5*scale}px Arial`;
         ctx.fillStyle = "#000"
-        ctx.fillText("MG",this.center[0] - ctx.measureText("MG").width/2,this.center[1]+10)
+        ctx.fillText("MG",this.center[0] - ctx.measureText("MG").width/2,this.center[1]+scale)
     }
     drawRange(range){
         let curentAngle = this.angleOfAttack/2 - this.angleOfAttack
@@ -466,7 +467,7 @@ class MGG extends BS{
             if(pieceAlongPathData && pieceAlongPathData.group !== 'trenches'){
                 pieceAlongPath = bunkerGroupes[pieceAlongPathData.group].BBpieces[pieceAlongPathData.type][pieceAlongPathData.tier][pieceAlongPathData.piece]
             }
-            if(pieceAlongPath && ["BoB","RG","MMG","ATG","HG","SC","IC"].includes(pieceAlongPath.type) && this !== pieceAlongPath){
+            if(pieceAlongPath && ["BoB","RG","MMG","ATG","HG","SC","IC","OB"].includes(pieceAlongPath.type) && this !== pieceAlongPath){
                 let intersectTest 
                 for(let p = 0; p < 4; p ++){
                     intersectTest = intersects(
@@ -501,7 +502,7 @@ class MGG extends BS{
                 if(pieceAlongPathData && pieceAlongPathData.group !== 'trenches'){
                     pieceAlongPath = bunkerGroupes[pieceAlongPathData.group].BBpieces[pieceAlongPathData.type][pieceAlongPathData.tier][pieceAlongPathData.piece]
                 }
-                if(pieceAlongPath && ["BoB","RG","MGG","ATG","HG","SC","IC"].includes(pieceAlongPath.type) && this !== pieceAlongPath){
+                if(pieceAlongPath && ["BoB","RG","MGG","ATG","HG","SC","IC","OB"].includes(pieceAlongPath.type) && this !== pieceAlongPath){
                     let intersectTest 
                     for(let p = 0; p < 4; p ++){
                         intersectTest = intersects(
@@ -528,6 +529,7 @@ class MGG extends BS{
             ctx.closePath()
             ctx.fill()
             ctx.fillStyle = "#000"
+            ctx.globalCompositeOperation = 'destination-over';
 
         }
     }
@@ -561,7 +563,7 @@ class ATG extends BS{
     drawDetails(){
         ctx.font = `${2.5*scale}px Arial`;
         ctx.fillStyle = "#000"
-        ctx.fillText("AT",this.center[0] - ctx.measureText("AT").width/2,this.center[1]+10)
+        ctx.fillText("AT",this.center[0] - ctx.measureText("AT").width/2,this.center[1]+scale)
     }
     drawRange(range){
         // console.log('draw AT range ',range)
@@ -580,7 +582,7 @@ class ATG extends BS{
             if(pieceAlongPathData && pieceAlongPathData.group !== 'trenches'){
                 pieceAlongPath = bunkerGroupes[pieceAlongPathData.group].BBpieces[pieceAlongPathData.type][pieceAlongPathData.tier][pieceAlongPathData.piece]
             }
-            if(pieceAlongPath && ["BoB","RG","MMG","ATG","HG","SC","IC"].includes(pieceAlongPath.type) && this !== pieceAlongPath){
+            if(pieceAlongPath && ["BoB","RG","MMG","ATG","HG","SC","IC","OB"].includes(pieceAlongPath.type) && this !== pieceAlongPath){
                 let intersectTest 
                 for(let p = 0; p < 4; p ++){
                     intersectTest = intersects(
@@ -615,7 +617,7 @@ class ATG extends BS{
                 if(pieceAlongPathData && pieceAlongPathData.group !== 'trenches'){
                     pieceAlongPath = bunkerGroupes[pieceAlongPathData.group].BBpieces[pieceAlongPathData.type][pieceAlongPathData.tier][pieceAlongPathData.piece]
                 }
-                if(pieceAlongPath && ["BoB","RG","MGG","ATG","HG","SC","IC"].includes(pieceAlongPath.type) && this !== pieceAlongPath){
+                if(pieceAlongPath && ["BoB","RG","MGG","ATG","HG","SC","IC","OB"].includes(pieceAlongPath.type) && this !== pieceAlongPath){
                     let intersectTest 
                     for(let p = 0; p < 4; p ++){
                         intersectTest = intersects(
@@ -642,6 +644,7 @@ class ATG extends BS{
             ctx.closePath()
             ctx.fill()
             ctx.fillStyle = "#000"
+            ctx.globalCompositeOperation = 'destination-over';
 
         }
     }
@@ -675,7 +678,7 @@ class HG extends BS{
     drawDetails(){
         ctx.font = `${2.5*scale}px Arial`;
         ctx.fillStyle = "#000"
-        ctx.fillText("H",this.center[0] - ctx.measureText("H").width/2,this.center[1]+10)
+        ctx.fillText("H",this.center[0] - ctx.measureText("H").width/2,this.center[1]+scale)
     }
     drawRange(range){
         // console.log('draw HG range', range)
@@ -756,6 +759,7 @@ class HG extends BS{
             ctx.closePath()
             ctx.fill()
             ctx.fillStyle = "#000"
+            ctx.globalCompositeOperation = 'destination-over';
 
         }
     }
@@ -900,6 +904,7 @@ class BoB extends BS{
             ctx.closePath()
             ctx.fill()
             ctx.fillStyle = "#000"
+            ctx.globalCompositeOperation = 'destination-over';
 
         }
 }
@@ -1018,7 +1023,7 @@ class AB extends BS{
     drawDetails(){
         ctx.font = `${2.5*scale}px Arial`;
         ctx.fillStyle = "#000"
-        ctx.fillText("AB",this.center[0] - ctx.measureText("AB").width/2,this.center[1]+10)
+        ctx.fillText("AB",this.center[0] - ctx.measureText("AB").width/2,this.center[1]+scale)
     }
 }
 class EB extends BS{
@@ -1057,7 +1062,7 @@ class EB extends BS{
     drawDetails(){
         ctx.font = `${2.5*scale}px Arial`;
         ctx.fillStyle = "#000"
-        ctx.fillText("EB",this.center[0] - ctx.measureText("EB").width/2,this.center[1]+10)
+        ctx.fillText("EB",this.center[0] - ctx.measureText("EB").width/2,this.center[1]+scale)
     }
 }
 class OB extends BS{
@@ -1095,7 +1100,7 @@ class OB extends BS{
     drawDetails(){
         ctx.font = `${2.5*scale}px Arial`;
         ctx.fillStyle = "#000"
-        ctx.fillText("OB",this.center[0] - ctx.measureText("OB").width/2,this.center[1]+10)
+        ctx.fillText("OB",this.center[0] - ctx.measureText("OB").width/2,this.center[1]+scale)
     }
 }
 class IC extends BS{
@@ -1133,7 +1138,7 @@ class IC extends BS{
     drawDetails(){
         ctx.font = `${2.5*scale}px Arial`;
         ctx.fillStyle = "#000"
-        ctx.fillText("IC",this.center[0] - ctx.measureText("IC").width/2,this.center[1]+10)
+        ctx.fillText("IC",this.center[0] - ctx.measureText("IC").width/2,this.center[1]+scale)
     }
 }
 class SC extends BS{
@@ -1171,7 +1176,7 @@ class SC extends BS{
     drawDetails(){
         ctx.font = `${2.5*scale}px Arial`;
         ctx.fillStyle = "#000"
-        ctx.fillText("SC",this.center[0] - ctx.measureText("SC").width/2,this.center[1]+10)
+        ctx.fillText("SC",this.center[0] - ctx.measureText("SC").width/2,this.center[1]+scale)
     }
 }
 class TS{

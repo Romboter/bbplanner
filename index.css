@@ -1,6 +1,34 @@
+#labelsh,#canvas_width,#canvas_height {
+  display:inline-block;
+  width: 50px;
+  text-align: center;
+  margin-right: 10px;
+}
+
+#rangeToggle input[id$="Range"] {
+  width: 40px;
+  text-align: center;
+}
+#BunkerSelector [type="radio"], #tierSelector [type="radio"], #otherTools [type="radio"] {  
+  position: absolute;
+  left: -100vw;}
+/* #BunkerSelector input[type="radio"]:checked + label,#tierSelector input[type="radio"]:checked + label {
+
+  font-weight: bold;
+} */
+
+#BunkerSelector input:checked ~ span, #tierSelector input:checked ~ span, #otherTools input:checked ~ span {
+  font-weight: bold;
+  color:seagreen;
+}
+
+#otherTools {
+  padding-top: 10px;
+}
+
 #workspace_details_wraper{
   width: 80vw;
-  height: 100px;
+  height: 50px;
   top: 0;
   left: 0;
 position: absolute;
@@ -13,18 +41,21 @@ top: 0;
 position: absolute;
 }
 #canvas_wraper{
-left: 300px;
-top: 100px;
+left: 10%;
+top: 5px;
 bottom: 0;
 right: 150px;
 border: solid 1px black;
 position: absolute;
+margin-left: 5px;
+margin-right: 5px;
 }
 #BBdetails{
-  width: 300px;
+  width: 10%;
   height: calc(100vh - 100px);
   left: 0;
   bottom: 0;
+  top:50px;
   display:  flex;
   flex-direction: column;
   gap: 20px;
@@ -79,7 +110,7 @@ position: absolute;
   display: grid;
   grid-template-rows: repeat(14 , 1fr);
   grid-template-columns: 3fr 1fr 1fr 1fr;
-  width: 300px;
+  width: 100%;
   height: 300px;
   border: solid 1px #000;
 }
@@ -121,7 +152,7 @@ position: absolute;
   display: grid;
   grid-template-rows: repeat(7 , 1fr);
   grid-template-columns: 3fr 1fr 1fr;
-  width: 300px;
+  /* width: 300px; */
   height: 300px;
   border: solid 1px #000;
 }

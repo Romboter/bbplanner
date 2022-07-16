@@ -1,5 +1,5 @@
 var curentMouse = {'x':null,'y':null}
-var scale = 8
+var scale = 4
 var selectedType = undefined
 var selectedTier = undefined
 var rotation = 0
@@ -18,13 +18,17 @@ setTimeout(() => {
     canvas.height = canvas.getBoundingClientRect().height
     canvasTotalFieldWidthInput = document.getElementById("canvas_width")
     canvasTotalFieldWidthInput.value = canvas.width
-    canvasTotalFieldHeightInput = document.getElementById("canvas_heigth")
+    canvasTotalFieldHeightInput = document.getElementById("canvas_height")
     canvasTotalFieldHeightInput.value = canvas.height
 }, 1);
 
 // var scale = document.getElementById('zoom').value
 /** @type {CanvasRenderingContext2D} */
 var ctx = canvas.getContext('2d')
+
+
+
+
 
 // var canvasViewOffsetX = 0
 // var canvasViewOffsetY = 0
@@ -356,9 +360,10 @@ var canvasLoop = setInterval(newUpdateCanvas,200)
 
 function newUpdateCanvas(){
     // set canvas size and scale
-    // scale = document.getElementById('zoom').value
+   // scale = document.getElementById('zoom').value
     canvas.width = canvas.getBoundingClientRect().width
     canvas.height = canvas.getBoundingClientRect().height
+
     // console.log(canvas.width,canvas.height)
     // console.log(canvasViewOffsetX,canvasViewOffsetY)
     selectedType = document.querySelector('input[name="type"]:checked')?.value
@@ -406,7 +411,7 @@ function newUpdateCanvas(){
     if(BGHighlightBool) highlightSelectedBunkerGroup()
     
 
-    // ctx.translate(canvasViewOffsetX,canvasViewOffsetY)
+     ctx.translate(canvasViewOffsetX,canvasViewOffsetY)
 }
 // update canvas related functions
 function checkAvailibleTiers(){
