@@ -20,6 +20,7 @@ setTimeout(() => {
     canvasTotalFieldWidthInput.value = canvas.width
     canvasTotalFieldHeightInput = document.getElementById("canvas_height")
     canvasTotalFieldHeightInput.value = canvas.height
+    window.requestAnimationFrame(newUpdateCanvas)
 }, 1);
 
 // var scale = document.getElementById('zoom').value
@@ -356,7 +357,7 @@ function findClosestBunkerPieceToPosition(x,y){
 
 
 
-var canvasLoop = setInterval(newUpdateCanvas,200)
+// var canvasLoop = setInterval(newUpdateCanvas,200)
 
 function newUpdateCanvas(){
     // set canvas size and scale
@@ -411,7 +412,8 @@ function newUpdateCanvas(){
     if(BGHighlightBool) highlightSelectedBunkerGroup()
     
 
-     ctx.translate(canvasViewOffsetX,canvasViewOffsetY)
+    //  ctx.translate(canvasViewOffsetX,canvasViewOffsetY)
+    window.requestAnimationFrame(newUpdateCanvas)
 }
 // update canvas related functions
 function checkAvailibleTiers(){
